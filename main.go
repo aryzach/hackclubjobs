@@ -289,15 +289,26 @@ func main() {
 		os.Mkdir("tmp/", os.ModeDir)
 	}
 
-	privateBytes, err := ioutil.ReadFile("tmp/id_rsa")
+	privateBytes, err := ioutil.ReadFile("id_rsa")
 	if err != nil {
-		panic("Failed to open private key from disk. Try running `ssh-keygen` in tmp/ to create one.")
+		panic("Failed to load private key")
 	}
 
 	private, err := ssh.ParsePrivateKey(privateBytes)
 	if err != nil {
 		panic("Failed to parse private key")
 	}
+
+
+//	privateBytes, err := ioutil.ReadFile("tmp/id_rsa")
+//	if err != nil {
+//		panic("Failed to open private key from disk. Try running `ssh-keygen` in tmp/ to create one.")
+//	}
+
+//	private, err := ssh.ParsePrivateKey(privateBytes)
+//	if err != nil {
+//		panic("Failed to parse private key")
+//	}
 
 	config.AddHostKey(private)
 
